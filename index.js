@@ -32,6 +32,11 @@ let getMovie = () => {
             }
 
             if (data.Response == "True") {
+
+                const runtime = data.Runtime.replace(" min", "")
+                const hours = Math.floor(runtime / 60)
+                const minutes = runtime % 60
+
                 translateText().then((translation) => {
                     result.innerHTML = `
                     <div class="info">
@@ -45,7 +50,7 @@ let getMovie = () => {
                             <div class="details">
                                 <span>${data.Rated}</span>
                                 <span>${data.Year}</span>
-                                <span>${data.Runtime}</span>
+                                <span>${hours}h${minutes}min</span>
                             </div>
                             <div class="genre">
                                 <div>${data.Genre.split(",").join("</div><div>")}</div>
